@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+
+    <style>
+.login-container{
+    margin-top: 1%;
+    margin-bottom: 2%;
+}
+.login-form-1{
+    padding: 5%;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.4), 0 9px 26px 0 rgba(0, 0, 0, 0.55);
+}
+.login-form-1 h2{
+    text-align: center;
+    color: #333;
+}
+
+.login-container form{
+    padding: 10%;
+}
+.btnSubmit
+{
+    width: 50%;
+    border-radius: 1rem;
+    padding: 1.5%;
+    margin-left:100px;
+    border: none;
+    cursor: pointer;
+}
+
+.login-form-1 .btnSubmit{
+    font-weight: 900;
+    color: #fff;
+    background-color: #0062cc;
+}
+.login-form-1 .Register{
+    color: #0062cc;
+    font-weight: 600;
+    text-decoration: none;
+    margin-left:150px;
+}
+.login-form-1 .ForgetPwd{
+    color: #0062cc;
+    font-weight: 600;
+    text-decoration: none;
+    margin-left:120px;
+}
+
+
+</style>
+    <br>
+    <br>
+<div class="container login-container">
+            <div class="row ">
+                <div class="col-md-7">
+                      <a href="http://www.uwindsor.ca/" target="_blank">
+                        <img src={% static 'images/uwin1.png' %} alt="University of Windsor" width="700" height="350">
+                      </a>
+                </div>
+                <div class="col-md-5 login-form-1">
+                    <h2> Register </h2>
+                    <form class="form-horizontal" action='' method="POST">
+
+                    <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Your Email *" value="" />
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" placeholder="Your Password *" value="" />
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" placeholder="Confirm Password *" value="" />
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btnSubmit">Register</button>
+                        </div>
+                        <div class="form-group">
+                            <a href={% url 'login' %} class="ForgetPwd">Back to Login Page </a>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+  </div>
+    <br>
+    <br>
+{% endblock content %}

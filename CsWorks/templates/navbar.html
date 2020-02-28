@@ -1,0 +1,44 @@
+{% load static %}
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top">
+
+  <a class="navbar-brand" href="home_page.html">
+    <img src="{% static  'images/rsz_uwin_logo1.jpg' %}" alt="Image not found">
+  </a>
+
+  <button class="navbar-toggler" data-toggle="collapse" data-target="#collapse_target">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="collapse_target">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link" href={% url 'home'%}>Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Resource</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href={% url 'about' %}>About</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+          More
+        </a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href={% url 'help' %}>Help</a>
+          <a class="dropdown-item" href="#">Agreement</a>
+        </div>
+      </li>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+              Login As
+            </a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href={% url 'clientlogin' %}>Client</a>
+              <a class="dropdown-item" href={% url 'workerlogin' %}>Worker</a>
+              <a class="dropdown-item" href={% url 'adminlogin' %}>Admin</a>
+            </div>
+      </li>
+    </ul>
+  </div>
+</nav>

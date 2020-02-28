@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+
+<div class="col-sm-8 offset-sm-2">
+ <div id="demo" class="carousel slide" data-ride="carousel">
+  <ul class="carousel-indicators">
+    <li data-target="#demo" data-slide-to="0" class="active" style="background-color: #7d7da8"></li>
+    <li data-target="#demo" data-slide-to="1" style="background-color: #7d7da8"></li>
+    <li data-target="#demo" data-slide-to="2" style="background-color: #7d7da8"></li>
+  </ul>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <a href="http://www.uwindsor.ca/" target="_blank"><img src={% static  'images/uwin1.png' %} alt="University of Windsor" width="1100" height="500"></a>
+      <div class="carousel-caption">
+        <strong><font color="gray">Here</font> <font color="gray">Is</font> <font color="gray">More!</font></strong>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <a href="http://learn.uwindsor.ca/future-students" target="_blank"><img src={% static  'images/uwin2.png' %} alt="Road to Success" width="1100" height="500"></a>
+      <div class="top-left">
+        <img style="width: 55%; height: 55%;" src="http://images.e.uwindsor.ca/Web/UniversityofWindsor/{21abc3e9-d8c0-4e1f-8d4f-c34619db8ecb}_discover-the-opportunities-script-white.png" alt="Discover the opportunities!">
+        <br>
+        <font style="color: #FFCE00; text-shadow: 0px 1px 5px #464646;"><strong>YOUR FUTURE</strong></font><br>
+        <font style="color: #FFCE00; text-shadow: 0px 1px 5px #464646;"><strong>MADE IN</strong></font><br>
+        <font style="color: #FFCE00; text-shadow: 0px 1px 5px #464646;"><strong>WINDSOR</strong></font>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <a href="http://ask.uwindsor.ca/" target="_blank"><img src={% static  'images/uwin3.png' %} alt="Cheers" width="1100" height="500"></a>
+      <div class="top-center">
+        <h3><strong><font style="color: #FFCE00; font-size: 50px;">ask.</font><font color="white" style=" font-size: 50px;">Uwindsor</font></strong></h3>
+      </div>
+    </div>
+  </div>
+  <a class="carousel-control-prev" href="#demo" data-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </a>
+  <a class="carousel-control-next" href="#demo" data-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </a>
+ </div>
+<h4 align="center">Accordion FAQ</h4>
+  <div class="row">
+        <div class="col-10 mx-auto">
+            <div class="accordion" id="faqExample">
+                <div class="card">
+                    <div class="card-header p-2" id="headingOne">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                              Q: How are the fees calculated?
+                            </button>
+                          </h5>
+                    </div>
+                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#faqExample">
+                        <div class="card-body">
+                            <b>Answer:</b> It depends on how much a client would pay for each of his or her project.
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header p-2" id="headingTwo">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                              Q: How do workers collect money or rewards for the projects they have completed?
+                            </button>
+                          </h5>
+                    </div>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#faqExample">
+                        <div class="card-body">
+                            <b>Answer:</b> Once a client approves a completed project, our system will transfer the deposit (full funds) from the client's Uwindsor Turk account to the corresponding worker's account (Uwindsor Turk). Additionally, workers may transfer the earnings to their Uwindsor student account.
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header p-2" id="headingThree">
+                        <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                          Q: What is the timeline of the completion for a project?
+                        </button>
+                      </h5>
+                    </div>
+                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#faqExample">
+                        <div class="card-body">
+                            <b>Answer:</b> It depends on the requirements of the client.
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header p-2" id="headingFour">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                              Q. Who do I contact incase of any problems regards to a completed project later on?
+                            </button>
+                          </h5>
+                    </div>
+                    <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#faqExample">
+                        <div class="card-body">
+                             <b>Answer:</b> The support is available at support@uwindsor.ca.
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header p-2" id="headingFive">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                              Q. Can students from other majors or individuals register as workers?
+                            </button>
+                          </h5>
+                    </div>
+                    <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#faqExample">
+                        <div class="card-body">
+                            <b>Answer:</b> No. We currently only accept students from the Computer Science department of the University of Windsor to register as our workers.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<br>
+{% endblock content %}
