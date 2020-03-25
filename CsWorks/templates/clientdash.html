@@ -1,0 +1,190 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <style>
+    .img_long img {
+    width: 100%;
+    height: 100%;
+  }
+
+    .btn {
+      border: #667ac2;
+      background-color: #667ac2;
+    }
+
+    .page-link {
+      color: white;
+      background-color: #343a40;
+    }
+
+    .list-group-item:hover {
+      background-color: #d1d1e0;
+    }
+  </style>
+
+   <div class="row" style="margin-top:80px">
+  <div class="col-sm-4">
+  	<div class="card col-sm-8 offset-sm-3">
+  		<br>
+    	<img class="card-img-top" src={% static 'images/img_avatar.png' %} alt="Card image" style="width:100%">
+    		<div class="card-body" id="inform">
+      		<!-- <template id="information"> -->
+      		<h4 class="card-title">Username: Akcloud</h4>
+      		<p class="card-text">My Projects: 13</a></p>
+      		<p class="card-text">Finished Projects: <a href="#">0</a></p>
+          <a href="#" class="btn btn-primary">Create New Project</a>
+          <br>
+          <br>
+      		<a href="client_info.html" class="btn btn-primary">View Profile</a>
+      		<!-- </template> -->
+    		</div>
+  	</div>
+  	<div class="card col-sm-8 offset-sm-3">
+  		<div class="card-body">
+    		<h4 class="card-title">Message Box</h4>
+    		<button type="button" class="btn btn-primary">Message Reply <span class="badge badge-light">4</span></button>
+  		</div>
+  	</div>
+  </div>
+
+<div class="col-sm-8">
+    <div class="col-sm-10 offset-sm-1">
+    		<br>
+        <div class="img_long">
+    		  <a href="#"><img src={% static 'images/shutterstock.jpg' %}></a>
+        </div>
+        <hr style="filter: progid:dximagetransform.microsoft.glow(color="#987cb9,strength=10) width="100%" color="#987cb9" size=1>
+
+      <!-- <p><font size="4"><strong>Projects Being Taken</strong></font></p> -->
+
+       <ul class="nav nav-tabs" role="tablist" style="border-color: white">
+        <li class="nav-item">
+          <a class="nav-link active" style="border-color: white"><font size="4">Projects In Progress</font></a>
+        </li>
+      </ul>
+
+      <div id="project-under-review" class="container tab-pane active">
+     	<div class="list-group" id="project">
+        <!-- <template id="processing-projects"> -->
+        	<a href="#" class="list-group-item list-group-item-action"> <!-- row one -->
+        	<div><span><strong>Dictionary Simulator</strong></span><span style="float:right">Reward: 30 pts</span></div>
+        	<div><span>Due: 01/21/2020</span><span style="float:right">Taken by: Brick</span></div></a> <!-- row one end -->
+        <!-- </template> -->
+        	<a href="#" class="list-group-item list-group-item-action">
+        	<div><span><strong>Names Generator</strong></span><span style="float:right">Reward: 30</span></div>
+          <div><span>Due: 01/31/2020</span><span style="float:right">Taken by: Simon</span></div></a>
+        	<a href="#" class="list-group-item list-group-item-action">
+        	<div><span><strong>Shortest Path Calculator</strong></span><span style="float:right">Reward: 20 pts</span></div>
+          <div><span>Due: 01/10/2020</span><span style="float:right">Taken by: Bob</span></div></a>
+        	<a href="#" class="list-group-item list-group-item-action">
+        	<div><span><strong>The Rocket Game (in C)</strong></span><span style="float:right">Reward: 100 pts</span></div>
+          <div><span>Due: 03/20/2020</span><span style="float:right">Taken by: Rishi</span></div></a>
+        	<a href="#" class="list-group-item list-group-item-action">
+        	<div><span><strong>Image Converter</strong></span><span style="float:right">Reward: 35 pts</span></div>
+          <div><span>Due: 03/02/2020</span><span style="float:right">Taken by: Kelvin</span></div></a>
+      </div>
+      <br>
+      <a href="#" class="btn btn-info" role="button">Previous</a>
+      <a href="#" class="btn btn-info float-right" role="button">Next</a>
+    </div>
+
+  	  <hr style="filter: progid:dximagetransform.microsoft.glow(color="#987cb9,strength=10) width="100%" color="#987cb9" size=1>
+<!--       <p><font size="4"><strong>Projects Under Review</strong></font></p> -->
+
+      <ul class="nav nav-tabs" role="tablist" style="border-color: white">
+        <li class="nav-item">
+          <a class="nav-link active" data-toggle="tab" href="#posted-project" style="border-color: white"><font size="4">Posted Projects</font></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" href="#pending-project" style="border-color: white"><font size="4">Pending Projects</font></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" href="#draft" style="border-color: white"><font size="4">Drafts</font></a>
+        </li>
+      </ul>
+
+      <div class="tab-content">
+
+      <div id="posted-project" class="container tab-pane active">
+      <div class="list-group" id="posted-project-list">
+        <!-- <template id="reviewed-projects"> -->
+        <a href="posted_projects.html" class="list-group-item list-group-item-action" data-toggle="tooltip" data-placement="right" title="Click to view all applicants!"> <!-- row one -->
+        <div><span><strong>Searching Algorithm Comparision</strong></span><span style="float:right">Applicants:  3</span></div>
+        <div><span>Due: 12/30/2019</span></div></a> <!-- row one end -->
+        <!-- </template> -->
+        <a href="#" class="list-group-item list-group-item-action" data-toggle="tooltip" data-placement="right" title="Click to view all applicants!">
+        <div><span><strong>Web Application: Desktop Build Up</strong></span><span style="float:right">Applicants:  0</span></div>
+        <div><span>Due: 02/25/2020</span></div></a>
+        <a href="#" class="list-group-item list-group-item-action" data-toggle="tooltip" data-placement="right" title="Click to view all applicants!">
+        <div><span><strong>Assembly Translator (Bash)</strong></span><span style="float:right">Applicants:  2</span></div>
+        <div><span>Due: 01/20/2020</span></div></a>
+        <a href="#" class="list-group-item list-group-item-action" data-toggle="tooltip" data-placement="right" title="Click to view all applicants!">
+        <div><span><strong>IOS: Unit Converter with Animation</strong></span><span style="float:right">Applicants:  5</span></div>
+        <div><span>Due: 02/20/2020</span></div></a>
+<!--         <a href="#" class="list-group-item list-group-item-action">
+        <div><span><strong>{{title}}</strong></span><span style="float:right">Applicants:  {{num}}</span></div>
+        <div><span>Due: {{end_date}}</span></div></a>
+ -->      </div>
+      <br>
+	    <a href="#" class="btn btn-info" role="button">Previous</a>
+      <a href="#" class="btn btn-info float-right" role="button">Next</a>
+    </div>
+
+      <div id="pending-project" class="container tab-pane fade">
+      <div class="list-group" id="pending-project-list">
+        <!-- <template id="reviewed-projects"> -->
+        <a href="#" class="list-group-item list-group-item-action"> <!-- row one -->
+        <div><span><strong>Grade Book Simulator</strong></span><span style="float:right">Status: Submitted</span></div>
+        <div><span>Date Submitted: 12/14/2019</span></div></a> <!-- row one end -->
+        <!-- </template> -->
+        <a href="#" class="list-group-item list-group-item-action">
+        <div><span><strong>Elevator Simulator</strong></span><span style="float:right">Status: Submitted</span></div>
+        <div><span>Date Submitted: 12/15/2019</span></div></a>
+<!--         <a href="#" class="list-group-item list-group-item-action">
+        <div><span><strong>{{title}}</strong></span><span style="float:right">Status:{{status}}</span></div>
+        <div><span>Date Submitted: {{start_date}}</span></div></a>
+        <a href="#" class="list-group-item list-group-item-action">
+        <div><span><strong>{{title}}</strong></span><span style="float:right">Status:{{status}}</span></div>
+        <div><span>Date Submitted: {{start_date}}</span></div></a> -->
+      </div>
+        <br>
+        <a href="#" class="btn btn-info" role="button">Previous</a>
+        <a href="#" class="btn btn-info float-right" role="button">Next</a>
+    </div>
+
+        <div id="draft" class="container tab-pane fade">
+        <div class="list-group" id="draft-list">
+        <!-- <template id="reviewed-projects"> -->
+        <a href="#" class="list-group-item list-group-item-action" data-toggle="tooltip" data-placement="left" title="Click to edit!">
+        <div><span><strong>Double Linked Lists</strong></span><span style="float:right">Status: Draft</span></div>
+        <div><span>Due: 12/25/2019</span></div></a>
+        <!-- </template> -->
+<!--         <a href="#" class="list-group-item list-group-item-action">
+        <div><span><strong>{{title}}</strong></span><span style="float:right">Status:{{status}}</span></div>
+        <div><span>Date Submitted: {{start_date}}</span></div></a>
+        <a href="#" class="list-group-item list-group-item-action">
+        <div><span><strong>{{title}}</strong></span><span style="float:right">Status:{{status}}</span></div>
+        <div><span>Date Submitted: {{start_date}}</span></div></a> -->
+        </div>
+          <br>
+          <a href="#" class="btn btn-info" role="button">Previous</a>
+          <a href="#" class="btn btn-info float-right" role="button">Next</a>
+        </div>
+    <br>
+  </div>
+	</div>
+</div>
+<script>
+
+  $(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();
+  });
+
+
+  $('#allprojects').click(function (e) {
+    window.location.href='clientdash.html';
+  });
+
+</script>
+{% endblock content %}

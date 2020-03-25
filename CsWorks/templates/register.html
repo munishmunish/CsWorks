@@ -8,7 +8,7 @@
     margin-bottom: 2%;
 }
 .login-form-1{
-    padding: 5%;
+    padding: 2%;
     box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.4), 0 9px 26px 0 rgba(0, 0, 0, 0.55);
 }
 .login-form-1 h2{
@@ -46,6 +46,9 @@
     text-decoration: none;
     margin-left:120px;
 }
+    .errors{
+        color: red;
+    }
 
 
 </style>
@@ -59,22 +62,43 @@
                       </a>
                 </div>
                 <div class="col-md-5 login-form-1">
-                    <h2> Register </h2>
-                    <form class="form-horizontal" action='' method="POST">
-
-                    <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Your Email *" value="" />
+                    <h2> Register New Client</h2>
+                    <form action='' method="POST">
+                        {% csrf_token %}
+                        <div class="errors">
+                            {% if form.errors %}
+                                {{ form.error_messages }}
+                            {% endif %}
                         </div>
                         <div class="form-group">
-                            <input type="password" class="form-control" placeholder="Your Password *" value="" />
+                            {{ form.username.label }} :
+                            {{ form.username}}
                         </div>
                         <div class="form-group">
-                            <input type="password" class="form-control" placeholder="Confirm Password *" value="" />
+                            {{ form.email.label }} :
+                            {{ form.email}}
+                        </div>
+                        <div class="form-group">
+                            {{ form.first_name.label }} :
+                            {{ form.first_name}}
+                        </div>
+                        <div class="form-group">
+                            {{ form.last_name.label }} :
+                            {{ form.last_name}}
+                        </div>
+                        <div class="form-group">
+                            {{ form.password1.label }} :
+                            {{ form.password1}}
+                        </div>
+                        <div class="form-group">
+                            {{ form.password2.label }} :
+                            {{ form.password2}}
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btnSubmit">Register</button>
                         </div>
-                        <div class="form-group">
+
+                            <div class="form-group">
                             <a href={% url 'login' %} class="ForgetPwd">Back to Login Page </a>
                         </div>
 

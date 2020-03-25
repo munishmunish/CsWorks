@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from django.contrib.auth.models import AbstractUser
 
 class Client(models.Model):
     username = models.EmailField(max_length=200, unique=True)

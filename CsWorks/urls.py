@@ -23,8 +23,11 @@ urlpatterns = [
     path(r'', views.home, name='home'),
     path(r'about/', views.about, name='about'),
     path(r'help/', views.help, name='help'),
-    path(r'adminlogin/', views.admin_login, name='adminlogin'),
-    path(r'workerlogin/', views.worker_login, name='workerlogin'),
-    path(r'clientlogin/', views.client_login, name='clientlogin'),
+    path(r'logout/', views.logoutUser, name='logout'),
+    path(r'login/', views.loginUser, name='login'),
     path(r'register/', views.register, name='register'),
+    path(r'logout/', views.logout, name='logout'),
+    path(r'login/admindash', views.admin_dash, name='admindash'),
+    path(r'login/clientdash', views.client_dash, name='clientdash'),
+
 ]
