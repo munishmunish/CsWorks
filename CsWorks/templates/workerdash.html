@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="row" style="margin-top:80px; margin-bottom:80px ">
+  <div class="col-sm-4">
+  <div class="card col-sm-8 offset-sm-2">
+    <img class="card-img-top" src={% static 'images/img_avatar.png' %} alt="Card image" style="width:100%">
+    <div class="card-body" id="inform">
+{#      <template id="information">#}
+{#      <h4 class="card-title">Username:{{username}}</h4>#}
+{#      <p class="card-text">Rank:{{rank}}</p>#}
+{#      <p class="card-text">Total points:{{points}}</p>#}
+{#      <p class="card-text">Project num:<a href="#">{{num}}</a></p>#}
+{#      <p class="card-text">Rate:{{rate}}</p>#}
+{#      <a href="#" class="btn btn-primary">See Profile</a>#}
+{#      </template>#}
+    </div>
+  </div>
+
+  <div class="card col-sm-8 offset-sm-2">
+  <div class="card-body">
+    <h4 class="card-title">Message box</h4>
+    <button type="button" class="btn btn-primary"> Application reply<span class="badge badge-light">4</span>
+</button>
+  </div>
+</div>
+  </div>
+
+
+  <div class="col-sm-8">
+    <div class="col-sm-10  offset-sm-1">
+      <p><strong>New Projects</strong></p>
+      <hr style="filter: progid:dximagetransform.microsoft.glow(color="#987cb9",strength=10)" width="100%" color="#987cb9" size=1>
+
+      <div class="card-deck" id="newproject">
+{#        <template id="new-projects">#}
+{#	        <div class="card bg-primary">#}
+{#	          <img class="card-img-top" src="./images/avatar.png" alt="Card image" style="width:100%">#}
+{#	          <div class="card-body">#}
+{#	              <p class="card-text"><strong>{{title}}</strong></p>#}
+{#	              <p class="card-text">Publisher:{{publisher}}</p>#}
+{#	              <p class="card-text">Keywords:{{keywords}}</p>#}
+{#	              <a href="http://localhost:8080/projects/detail?id={{post_id}}" class="btn btn-primary stretched-link">View Detail</a>#}
+{#	          </div>#}
+{#	        </div>#}
+{#        </template>#}
+      </div>
+
+      <br>
+      <div class="btn-group">
+        <button type="button" class="btn btn-primary" id="findmore">Find New</button>
+        <button type="button" class="btn btn-primary" id="allprojects">See All</button>
+      </div>
+
+      <hr style="filter: progid:dximagetransform.microsoft.glow(color="#987cb9",strength=10)" width="100%" color="#987cb9" size=1>
+      <p><strong>My Projects</strong></p>
+
+
+      <div class="list-group" id="project">
+{#        <template id="accepted-projects">#}
+{#        <a href="http://localhost:8080/worker/submit?id={{post_id}}" class="list-group-item list-group-item-action">#}
+{#        <div><span><strong>{{title}}</strong></span><span style="float:right">{{payment}} points</span></div>#}
+{#        <div><span>keywords:{{keywords}}</span><span style="float:right">Due day:{{end_date}}</span></div></a>#}
+{#        </template>#}
+      </div>
+
+<div class="row justify-content-center">
+  <ul class="pagination">
+    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+    <li class="page-item"><a class="page-link" href="#">1</a></li>
+    <li class="page-item"><a class="page-link" href="#">2</a></li>
+    <li class="page-item"><a class="page-link" href="#">3</a></li>
+    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+  </ul></div>
+
+</div>
+</div>
+</div>
+{% endblock content %}

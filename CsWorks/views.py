@@ -1,11 +1,12 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, logout
 from django.contrib.auth import login
-from django.http import HttpResponseRedirect, HttpResponse
-from django.urls import reverse
+
+from myapp.decorators import unauthenticated_user, allowed_users, admin_only
 from myapp.forms import CreatUserForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import Group
 
 def home(request):
     return render(request, 'home.html')
@@ -16,32 +17,25 @@ def about(request):
 def help(request):
     return render(request, 'help.html')
 
-# def admin_login(request):
-#     if request.method == 'POST':
-#         username = request.POST.get('username')
-#         password = request.POST.get('password')
-#         user = authenticate(username=username, password=password)
-#         if user:
-#             if user.is_active:
-#                 login(request, user)
-#                 return HttpResponseRedirect(reverse('admindash'))
-#         else:
-#             messages.error(request, 'Invalid login details.')
-#             return render(request, 'admin_login.html')
-#     else:
-#         return render(request, 'admin_login.html')
-
-# def worker_login(request):
-#     return render(request, 'worker_login.html')
-
+@unauthenticated_user
 def loginUser(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
         user = authenticate(request, username=username, password=password)
         if user is not None:
-            login(request, user)
-            return redirect('admindash')
+            admin_user = Group.objects.get(name="admin").user_set.all()
+            if user in admin_user:
+                login(request, user)
+                return redirect('admindash')
+            client_user = Group.objects.get(name="client").user_set.all()
+            if user in client_user:
+                login(request, user)
+                return redirect('clientdash')
+            worker_user = Group.objects.get(name="worker").user_set.all()
+            if user in worker_user:
+                login(request, user)
+                return redirect('workerdash')
         else:
             messages.error(request, 'Incorrect Username or Password')
             return redirect('login')
@@ -52,22 +46,34 @@ def logoutUser(request):
     logout(request)
     return redirect('login')
 
+@unauthenticated_user
 def register(request):
     form = CreatUserForm()
     if request.method == 'POST':
         form = CreatUserForm(request.POST)
         if form.is_valid():
-            form.save()
-            user = form.cleaned_data.get('username')
-            messages.success(request, 'Account was created successfully for ' + user)
+            user = form.save()
+            username = form.cleaned_data.get('username')
+
+            group = Group.objects.get(name="client")
+            user.groups.add(group)
+
+            messages.success(request, 'Account was created successfully for ' + username)
             return redirect('login')
     context = {'form': form}
     return render(request, 'register.html', context)
+
 
 @login_required(login_url='login')
 def admin_dash(request):
     return render(request,'admindash.html')
 
 @login_required(login_url='login')
+# @allowed_users(allowed_roles=['client'])
+# @admin_only
 def client_dash(request):
     return render(request,'clientdash.html')
+
+@login_required(login_url='login')
+def worker_dash(request):
+    return render(request,'workerdash.html')
