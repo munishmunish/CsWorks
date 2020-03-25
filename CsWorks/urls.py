@@ -26,7 +26,6 @@ urlpatterns = [
     path(r'logout/', views.logoutUser, name='logout'),
     path(r'login/', views.loginUser, name='login'),
     path(r'register/', views.register, name='register'),
-    path(r'logout/', views.logout, name='logout'),
     path(r'login/admindash', views.admin_dash, name='admindash'),
     path(r'login/clientdash', views.client_dash, name='clientdash'),
     path(r'login/workerdash', views.worker_dash, name='workerdash'),
