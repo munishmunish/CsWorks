@@ -4,7 +4,7 @@
 
     <style>
   body {
-    background-image: {% static "images/brain_strom.png" %};
+    background-image: url('images/brain_strom.png');
     {#background-size: cover;#}
   }
 
@@ -72,8 +72,15 @@
     #save_num {
       display: none;
     }
+    .layout{
+        background-color: white;
+        margin-top: 2rem;
+        box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.4), 0 9px 26px 0 rgba(0, 0, 0, 0.55);
+
+    }
   </style>
-<div class="card col-sm-8 offset-sm-2" style="background-color: white!important;">
+  <body>
+    <div class="card col-sm-8 offset-sm-2 layout">
       <br>
       <br>
       <br>
@@ -84,7 +91,7 @@
           </a>
           <h2 class="card-title font-weight-bold"><i class="fa fa-address-card-o" style="font-size:36px; color: #667ac2;"></i> My Profile</h2>
             <hr style="filter: progid:dximagetransform.microsoft.glow(color="#987cb9,strength=10) width="100%" color="#987cb9" size=1>
-            <h4 class="card-description">Client Information</h4>
+            <h4 class="card-description">Personal Information</h4>
               <ul id="information" style="list-style-type:none">
               <li>
               <p>
@@ -140,6 +147,7 @@
 <br>
 <br>
 </div>
+</body>
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <script src="/js/mustache.js"></script>
   <script src="/js/main.js"></script>

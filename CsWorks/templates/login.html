@@ -43,7 +43,7 @@
     color: #0062cc;
     font-weight: 600;
     text-decoration: none;
-    margin-left:90px;
+    margin-left:105px;
 }
 .errors{
     color:red;
@@ -55,12 +55,12 @@
     <br>
 <div class="container login-container">
             <div class="row ">
-                <div class="col-md-7 ">
+                <div class="col-md-6 ">
                     <a href="http://www.uwindsor.ca/" target="_blank">
-                        <img src={% static 'images/uwin1.png' %} alt="University of Windsor" width="700" height="350">
+                        <img src={% static 'images/uwin4.png' %} alt="University of Windsor" width="500" height="250">
                       </a>
                 </div>
-                <div class="col-md-5 login-form-1">
+                <div class="col-md-6 login-form-1">
                     {% for message in messages %}
                         {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
                             <h4 style="color:green">{{ message }}</h4>
@@ -82,7 +82,7 @@
                             <button type="submit" class="btnSubmit">LOGIN</button>
                         </div>
                         <div class="form-group">
-                            <h5 style="margin-left: 70px">No Account? <a href={% url 'register' %} class="Register">SignUp</a></h5style>
+                            <h5 style="margin-left: 90px">No Account? <a href={% url 'register' %} class="Register">SignUp</a></h5style>
                         </div>
                         <div class="form-group">
                             <h5><a href="#" class="ForgetPwd">Forget Password?</a></h5>
