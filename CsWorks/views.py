@@ -3,7 +3,7 @@ from django.contrib.auth import authenticate, logout
 from django.contrib.auth import login
 
 from myapp.decorators import unauthenticated_user, allowed_users, admin_only
-from myapp.forms import CreatUserForm
+from myapp.forms import CreatUserForm, CreatProjectForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
@@ -66,14 +66,28 @@ def register(request):
 
 @login_required(login_url='login')
 def admin_dash(request):
-    return render(request,'admindash.html')
+    return render(request, 'admindash.html')
 
-@login_required(login_url='login')
+# @login_required(login_url='login')
 # @allowed_users(allowed_roles=['client'])
 # @admin_only
 def client_dash(request):
-    return render(request,'clientdash.html')
+    return render(request, 'clientdash.html')
 
 @login_required(login_url='login')
 def worker_dash(request):
-    return render(request,'workerdash.html')
+    return render(request, 'workerdash.html')
+
+@login_required(login_url='login')
+def worker_detail(request):
+    return render(request, 'worker_detail.html')
+
+@login_required(login_url='login')
+def client_detail(request):
+    return render(request, 'client_detail.html')
+
+# @login_required(login_url='login')
+def create_project(request):
+    form = CreatProjectForm
+    context = {'form': form}
+    return render(request, 'create_project.html', context)

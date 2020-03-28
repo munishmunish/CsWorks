@@ -37,13 +37,13 @@
     color: #0062cc;
     font-weight: 600;
     text-decoration: none;
-    margin-left:130px;
+    {#margin-left:130px;#}
 }
 .login-form-1 .ForgetPwd{
     color: #0062cc;
     font-weight: 600;
     text-decoration: none;
-    margin-left:100px;
+    margin-left:90px;
 }
 .errors{
     color:red;
@@ -82,10 +82,10 @@
                             <button type="submit" class="btnSubmit">LOGIN</button>
                         </div>
                         <div class="form-group">
-                           <a href={% url 'register' %} class="Register">SignUp</a>
+                            <h5 style="margin-left: 70px">No Account? <a href={% url 'register' %} class="Register">SignUp</a></h5style>
                         </div>
                         <div class="form-group">
-                            <a href="#" class="ForgetPwd">Forget Password?</a>
+                            <h5><a href="#" class="ForgetPwd">Forget Password?</a></h5>
                         </div>
                     </form>
                 </div>

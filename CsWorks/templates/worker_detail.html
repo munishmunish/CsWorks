@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+<style>
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 100%;
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.container {
+  padding: 2px 16px;
+}
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+</style>
+<div class="row">
+    <div class="col-md-8"></div>
+    <div class="col-md-4" style="display:flex;justify-content:flex-end">
+{#        <a href={% url 'logout' user_type='worker' %}>Logout</a>#}
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <div class="card">
+          <img src="https://www.w3schools.com/howto/img_avatar.png" alt="Avatar" style="width:100%">
+          <div class="container">
+            <h4><b>{{user.first_name}}&nbsp;{{user.last_name}}</b></h4>
+              <div><b>Phone Number: </b>{{user.phone_number}}</div>
+            <div><b>Email: </b>{{user.username}}</div>
+              <div><b>Status: </b>{{user.status}}</div>
+          </div>
+        </div>
+    </div>
+    <div class="col-md-2"></div>
+    <div class="col-md-6">
+        <div>
+        <h3>Project List</h3>
+            <table>
+                <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Start Date</th>
+                    <th>Status</th>
+                </tr>
+                {% for project in projectList %}
+                <tr>
+                    <td>{{project.title}}</td>
+                    <td>{{project.description}}</td>
+                    <td>{{project.start_date}}</td>
+                    <td>{{project.status}}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock content %}

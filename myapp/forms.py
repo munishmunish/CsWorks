@@ -1,8 +1,10 @@
 from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import User
-from myapp.models import Admin, Worker, Client
+from myapp.models import Project
 from django.contrib.auth.forms import UserCreationForm
+from django.forms import ModelForm
+
 
 class CreatUserForm(UserCreationForm):
     class Meta:
@@ -24,3 +26,12 @@ class CreatUserForm(UserCreationForm):
         self.fields['password1'].widget.attrs['class'] = 'form-control'
         self.fields['password2'].widget = forms.PasswordInput(attrs={'placeholder': 'Confirm Password *'})
         self.fields['password2'].widget.attrs['class'] = 'form-control'
+
+class CreatProjectForm(ModelForm):
+    class Meta:
+        model = Project
+        fields = ['title', 'description', 'start_date', 'end_date', 'payment']
+        widget = forms.DateTimeInput(attrs={
+            'class': 'form-control datetimepicker-input',
+            'data-target': '#datetimepicker1'
+        })

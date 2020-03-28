@@ -30,13 +30,13 @@
     	<img class="card-img-top" src={% static 'images/img_avatar.png' %} alt="Card image" style="width:100%">
     		<div class="card-body" id="inform">
       		<!-- <template id="information"> -->
-      		<h4 class="card-title">Username: Akcloud</h4>
-      		<p class="card-text">My Projects: 13</a></p>
-      		<p class="card-text">Finished Projects: <a href="#">0</a></p>
-          <a href="#" class="btn btn-primary">Create New Project</a>
+      		<h4 class="card-title">Username: {{ request.user.username }}</h4>
+{#      		<p class="card-text">My Projects: 13</a></p>#}
+{#      		<p class="card-text">Finished Projects: <a href="#">0</a></p>#}
+          <a href={% url 'createproject' %} class="btn btn-primary">Create New Project</a>
           <br>
           <br>
-      		<a href="client_info.html" class="btn btn-primary">View Profile</a>
+      		<a href={% url 'clientdetail' %} class="btn btn-primary">View Profile</a>
       		<!-- </template> -->
     		</div>
   	</div>

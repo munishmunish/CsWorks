@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
+{% load crispy_forms_tags %}
 {% block content %}
 
     <style>
@@ -44,7 +45,7 @@
     color: #0062cc;
     font-weight: 600;
     text-decoration: none;
-    margin-left:120px;
+    {#margin-left:120px;#}
 }
     .errors{
         color: red;
@@ -56,12 +57,12 @@
     <br>
 <div class="container login-container">
             <div class="row ">
-                <div class="col-md-7">
+                <div class="col-md-6">
                       <a href="http://www.uwindsor.ca/" target="_blank">
-                        <img src={% static 'images/uwin1.png' %} alt="University of Windsor" width="700" height="350">
+                        <img src={% static 'images/uwin4.png' %} alt="University of Windsor" width="500" height="250">
                       </a>
                 </div>
-                <div class="col-md-5 login-form-1">
+                <div class="col-md-6 login-form-1">
                     <h2> Register New Client</h2>
                     <form action='' method="POST">
                         {% csrf_token %}
@@ -71,10 +72,10 @@
                         {% for field in form %}
                             <div>
     {#                                {{ field.label_tag }}#}
-                                <div style="margin-bottom: 1rem">{{ field }} </div>
-                                {%  for error in field.errors%}
-                                    <p style="color:red">{{ error }}</p>
-                                {%  endfor %}
+                                <div style="margin-bottom: 1rem">{{ field| as_crispy_field }} </div>
+{#                                {%  for error in field.errors%}#}
+{#                                    <p style="color:red">{{ error }}</p>#}
+{#                                {%  endfor %}#}
                             </div>
                         {% endfor %}
 
@@ -119,8 +120,8 @@
                             <button type="submit" class="btnSubmit">Register</button>
                         </div>
 
-                            <div class="form-group">
-                            <a href={% url 'login' %} class="ForgetPwd">Back to Login Page </a>
+                        <div>
+                         <h5 style="margin-left: 30px;text-align: center"> Have an account?  <a href={% url 'login' %} class="ForgetPwd">Login </a></h5>
                         </div>
 
                     </form>

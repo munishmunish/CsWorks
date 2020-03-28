@@ -1,0 +1,253 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+
+    <style>
+  body {
+    background-image: {% static "images/brain_strom.png" %};
+    {#background-size: cover;#}
+  }
+
+    .img_long img {
+    width: 100%;
+    height: 100%;
+  }
+
+    .btn {
+      border: #667ac2;
+      background-color: #667ac2;
+    }
+
+    .page-link {
+      color: white;
+      background-color: #343a40;
+    }
+
+    #editbox_uname {
+      display: none;
+    }
+    #cancel_uname {
+      display: none;
+    }
+    #save_uname {
+      display: none;
+    }
+
+    #editbox_fname {
+      display: none;
+    }
+    #cancel_fname {
+      display: none;
+    }
+    #save_fname {
+      display: none;
+    }
+
+    #editbox_lname {
+      display: none;
+    }
+    #cancel_lname {
+      display: none;
+    }
+    #save_lname {
+      display: none;
+    }
+
+    #editbox_mname {
+      display: none;
+    }
+    #cancel_mname {
+      display: none;
+    }
+    #save_mname {
+      display: none;
+    }
+
+    #editbox_num {
+      display: none;
+    }
+    #cancel_num {
+      display: none;
+    }
+    #save_num {
+      display: none;
+    }
+  </style>
+<div class="card col-sm-8 offset-sm-2" style="background-color: white!important;">
+      <br>
+      <br>
+      <br>
+      <div class="card col-sm-10 offset-sm-1" style="border-color: white">
+        <div class="card-body">
+          <a href={% url 'clientdash' %}>
+            <button class="btn btn-info btn-sm back float-right" style="font-size:20px">Back <i class="material-icons" style="font-size:18px"></i></button>
+          </a>
+          <h2 class="card-title font-weight-bold"><i class="fa fa-address-card-o" style="font-size:36px; color: #667ac2;"></i> My Profile</h2>
+            <hr style="filter: progid:dximagetransform.microsoft.glow(color="#987cb9,strength=10) width="100%" color="#987cb9" size=1>
+            <h4 class="card-description">Client Information</h4>
+              <ul id="information" style="list-style-type:none">
+              <li>
+              <p>
+                <strong>Username: </strong>
+                <span class="username">{{ request.user.username }}</span>
+                <button class="btn btn-info btn-sm cancel edit float-right" id="cancel_uname">Cancel</button>
+                <button class="btn btn-info btn-sm save edit float-right" id="save_uname" style="margin-right: 5px">Save</button>
+                <input class="edit fname form-control form-control-sm" placeholder="Username" id="editbox_uname"/>
+                <button class="btn btn-info btn-sm edit noedit float-right" id="edit_uname">Edit</button>
+              </p>
+              <p>
+                <strong>First Name: </strong>
+                <span class="noedit fname">{{ request.user.first_name }}</span>
+                <button class="btn btn-info btn-sm cancelEdit edit float-right" id="cancel_fname">Cancel</button>
+                <button class="btn btn-info btn-sm saveInform edit float-right" id="save_fname" style="margin-right: 5px">Save</button>
+                <input class="edit fname form-control form-control-sm" placeholder="First Name" id="editbox_fname"/>
+                <button class="btn btn-info btn-sm editInform noedit float-right" id="edit_fname">Edit</button>
+              </p>
+              <p>
+                <strong>Last Name: </strong>
+                <span class="noedit lname">{{ request.user.last_name }}</span>
+                <button class="btn btn-info btn-sm cancelEdit edit float-right" id="cancel_lname">Cancel</button>
+                <button class="btn btn-info btn-sm saveInform edit float-right" id="save_lname" style="margin-right: 5px">Save</button>
+                <input class="edit fname form-control form-control-sm" placeholder="Last Name" id="editbox_lname"/>
+                <button class="btn btn-info btn-sm editInform noedit float-right" id="edit_lname">Edit</button>
+              </p>
+              </li>
+              </ul>
+
+            <hr style="filter: progid:dximagetransform.microsoft.glow(color="#987cb9,strength=10) width="100%" color="#987cb9" size=1>
+
+            <h4 class="card-description">Contact Information</h4>
+            <ul id="information" style="list-style-type:none">
+              <li>
+              <p>
+                <i class="fa fa-envelope" aria-hidden="true" style="color: #667ac2;"></i> <strong>Email: </strong>
+                <span class="email">{{ request.user.email }}</span>
+              </p>
+{#              <p>#}
+{#                <i class="fa fa-mobile-phone"  style="font-size:24px; color: #667ac2;"></i> <strong>Phone: </strong>#}
+{#                <span class="noedit phone">2269750524</span>#}
+{#                <button class="btn btn-info btn-sm cancelEdit edit float-right" id="cancel_num">Cancel</button>#}
+{#                <button class="btn btn-info btn-sm saveInform edit float-right" id="save_num" style="margin-right: 5px">Save</button>#}
+{#                <input class="edit phone form-control form-control-sm" oninput = "value=value.replace(/[^\d]/g,'')" placeholder="Phone Number (numbers only)" id="editbox_num"/>#}
+{#                <button class="btn btn-info btn-sm editInform noedit float-right" id="edit_num">Edit</button>#}
+{#              </p>#}
+              </li>
+              </ul>
+        </div>
+      </div>
+      <br>
+    </div>
+<br>
+<br>
+</div>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="/js/mustache.js"></script>
+  <script src="/js/main.js"></script>
+  <script>
+    $('#edit_uname').click(function() {
+      $('#cancel_uname').show();
+      $('#save_uname').show();
+      $('#editbox_uname').show();
+      $('#edit_uname').hide();
+});
+
+    $('#cancel_uname').click(function() {
+      $('#cancel_uname').hide();
+      $('#save_uname').hide();
+      $('#editbox_uname').hide();
+      $('#edit_uname').show();
+});
+
+    $('#save_uname').click(function() {
+      $('#cancel_uname').hide();
+      $('#save_uname').hide();
+      $('#editbox_uname').hide();
+      $('#edit_uname').show();
+});
+
+    $('#edit_fname').click(function() {
+      $('#edit_fname').hide();
+      $('#cancel_fname').show();
+      $('#save_fname').show();
+      $('#editbox_fname').show();
+});
+
+    $('#cancel_fname').click(function() {
+      $('#cancel_fname').hide();
+      $('#save_fname').hide();
+      $('#editbox_fname').hide();
+      $('#edit_fname').show();
+});
+
+    $('#save_fname').click(function() {
+      $('#cancel_fname').hide();
+      $('#save_fname').hide();
+      $('#editbox_fname').hide();
+      $('#edit_fname').show();
+});
+
+    $('#edit_lname').click(function() {
+      $('#edit_lname').hide();
+      $('#cancel_lname').show();
+      $('#save_lname').show();
+      $('#editbox_lname').show();
+});
+
+    $('#cancel_lname').click(function() {
+      $('#cancel_lname').hide();
+      $('#save_lname').hide();
+      $('#editbox_lname').hide();
+      $('#edit_lname').show();
+});
+
+    $('#save_lname').click(function() {
+      $('#cancel_lname').hide();
+      $('#save_lname').hide();
+      $('#editbox_lname').hide();
+      $('#edit_lname').show();
+});
+
+    $('#edit_mname').click(function() {
+      $('#edit_mname').hide();
+      $('#cancel_mname').show();
+      $('#save_mname').show();
+      $('#editbox_mname').show();
+});
+
+    $('#cancel_mname').click(function() {
+      $('#cancel_mname').hide();
+      $('#save_mname').hide();
+      $('#editbox_mname').hide();
+      $('#edit_mname').show();
+});
+
+    $('#save_mname').click(function() {
+      $('#cancel_mname').hide();
+      $('#save_mname').hide();
+      $('#editbox_mname').hide();
+      $('#edit_mname').show();
+});
+
+    $('#edit_num').click(function() {
+      $('#edit_num').hide();
+      $('#cancel_num').show();
+      $('#save_num').show();
+      $('#editbox_num').show();
+});
+
+    $('#cancel_num').click(function() {
+      $('#cancel_num').hide();
+      $('#save_num').hide();
+      $('#editbox_num').hide();
+      $('#edit_num').show();
+});
+
+    $('#save_num').click(function() {
+      $('#cancel_num').hide();
+      $('#save_num').hide();
+      $('#editbox_num').hide();
+      $('#edit_num').show();
+});
+
+  </script>
+{% endblock content %}

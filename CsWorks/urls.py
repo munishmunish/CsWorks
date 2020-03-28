@@ -29,5 +29,9 @@ urlpatterns = [
     path(r'login/admindash', views.admin_dash, name='admindash'),
     path(r'login/clientdash', views.client_dash, name='clientdash'),
     path(r'login/workerdash', views.worker_dash, name='workerdash'),
+    path(r'login/workerdetail', views.worker_detail, name='workerdetail'),
+    path(r'login/clientdetail', views.client_detail, name='clientdetail'),
+    path(r'login/createproject', views.create_project, name='createproject'),
+
 
 ]
