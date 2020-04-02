@@ -3,10 +3,11 @@ from django.contrib.auth import authenticate, logout
 from django.contrib.auth import login
 
 from myapp.decorators import unauthenticated_user, allowed_users, admin_only
-from myapp.forms import CreatUserForm, CreatProjectForm
+from myapp.forms import CreatUserForm, CreateProjectForm, SkillForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
+from myapp.models import Project, Skills
 
 def home(request):
     return render(request, 'home.html')
@@ -66,13 +67,24 @@ def register(request):
 
 @login_required(login_url='login')
 def admin_dash(request):
-    return render(request, 'admindash.html')
+    projects = Project.objects.filter(status=1)
+    skills = Skills.objects.all()
+    form = SkillForm()
+    if request.method == 'POST':
+        form = SkillForm(request.POST)
+        if form.is_valid():
+            form.save()
+            skill = form.cleaned_data.get('skill')
+            messages.success(request, "New Skill " + skill + " added to the database")
+            return render(request, 'admindash.html', {'projects': projects, 'skills': skills, 'form': form})
+    return render(request, 'admindash.html', {'projects': projects, 'skills': skills, 'form': form})
 
 # @login_required(login_url='login')
 # @allowed_users(allowed_roles=['client'])
 # @admin_only
 def client_dash(request):
-    return render(request, 'clientdash.html')
+    projects = Project.objects.filter(username=request.user.username)
+    return render(request, 'clientdash.html', {'projects': projects})
 
 @login_required(login_url='login')
 def worker_dash(request):
@@ -86,8 +98,19 @@ def worker_detail(request):
 def client_detail(request):
     return render(request, 'client_detail.html')
 
-# @login_required(login_url='login')
+@login_required(login_url='login')
 def create_project(request):
-    form = CreatProjectForm
+    form = CreateProjectForm()
+    if request.method == 'POST':
+        form = CreateProjectForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.username = request.user.username
+            post.save()
+            messages.success(request, 'Project was created successfully')
+            return redirect('createproject')
+        else:
+            messages.error(request, "Something went wrong! Try again")
+            return redirect('createproject')
     context = {'form': form}
     return render(request, 'create_project.html', context)

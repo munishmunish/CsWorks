@@ -1,7 +1,9 @@
 from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import User
-from myapp.models import Project
+from myapp.models import Project, Skills
+from datetime import date
+from django.core.validators import MaxValueValidator
 from django.contrib.auth.forms import UserCreationForm
 from django.forms import ModelForm
 
@@ -27,11 +29,25 @@ class CreatUserForm(UserCreationForm):
         self.fields['password2'].widget = forms.PasswordInput(attrs={'placeholder': 'Confirm Password *'})
         self.fields['password2'].widget.attrs['class'] = 'form-control'
 
-class CreatProjectForm(ModelForm):
+class CreateProjectForm(forms.ModelForm):
+    end_date = forms.DateField(
+        widget=forms.DateInput(),
+        # validators=[MaxValueValidator(limit_value=date.today()),
+    )
+
     class Meta:
         model = Project
-        fields = ['title', 'description', 'start_date', 'end_date', 'payment']
-        widget = forms.DateTimeInput(attrs={
-            'class': 'form-control datetimepicker-input',
-            'data-target': '#datetimepicker1'
-        })
+        # fields = '__all__'
+        fields = ['title', 'description', 'start_date', 'end_date', 'total_work_hours', 'point_per_hour']
+
+    def __init__(self, *args, **kwargs):
+        super(CreateProjectForm, self).__init__(*args, **kwargs)
+
+        self.fields['start_date'].required = True
+        # self.fields['end_date'].required = True
+
+
+class SkillForm(forms.ModelForm):
+    class Meta:
+        model = Skills
+        fields = '__all__'

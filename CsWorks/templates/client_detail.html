@@ -4,7 +4,7 @@
 
     <style>
   body {
-    background-image: url('images/brain_strom.png');
+    {#background-image: url('{% static 'images/brain_strom.png' %}');#}
     {#background-size: cover;#}
   }
 
@@ -97,10 +97,7 @@
               <p>
                 <strong>Username: </strong>
                 <span class="username">{{ request.user.username }}</span>
-                <button class="btn btn-info btn-sm cancel edit float-right" id="cancel_uname">Cancel</button>
-                <button class="btn btn-info btn-sm save edit float-right" id="save_uname" style="margin-right: 5px">Save</button>
-                <input class="edit fname form-control form-control-sm" placeholder="Username" id="editbox_uname"/>
-                <button class="btn btn-info btn-sm edit noedit float-right" id="edit_uname">Edit</button>
+
               </p>
               <p>
                 <strong>First Name: </strong>

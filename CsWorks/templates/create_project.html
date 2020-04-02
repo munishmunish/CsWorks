@@ -9,7 +9,7 @@
         }
     </style>
 
-    <div class="row" style="margin-top:80px">
+    <div class="row" style="margin-top:80px; margin-bottom: 80px">
     <div class="col-sm-8 offset-sm-2">
     	<div class="card" style="background-color:lavender;">
       		<div class="col-sm-10 offset-sm-1">
@@ -17,152 +17,43 @@
                 <div class="heading">
                     <h3>Create New Project </h3>
                 </div>
-              <form action="/action_page.php" class="needs-validation" novalidate>
+
+                {% for message in messages %}
+                        {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+                            <h4 style="color:green">{{ message }}</h4>
+                        {% endif %}
+                        {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+                            <h4 style="color:red">{{ message }}</h4>
+                        {% endif %}
+                {% endfor %}
+              <form action="" method="POST">
                   {% csrf_token %}
-                  {{ form | crispy  }}
+                  {{ form | crispy }}
+{#                  {{ form.errors }}#}
+{#                    {{ form.non_field_errors }}#}
+
+
+{#                    {{ form.title | as_crispy_field }}#}
+{#                    {{ form.description | as_crispy_field }}#}
+{#                    {{ form.start_date | as_crispy_field }}#}
+{#                      {{ form.end_date | as_crispy_field }}#}
+{#                    {{ form.total_work_hours | as_crispy_field }}#}
+{#                    {{ form.point_per_hour | as_crispy_field }}#}
+
 
                   <div style = "margin-bottom: 2rem">
                         <button type="submit" class="btn btn-primary">Submit</button>
-                        <button class="btn btn-primary">Cancel</button>
+{#                        <button class="btn btn-primary">Cancel</button>#}
                     </div>
               </form>
-{#              <div class="form-group">#}
-{#                <label for="title"><h5>Project title:</h5></label>#}
-{#                <input type="text" class="form-control" id="title" placeholder="Please name your project here" required>#}
-{#                <div class="valid-feedback">Valid.</div>#}
-{#    			<div class="invalid-feedback">Please fill out this field.</div>#}
-{#             </div>#}
-{##}
-{#             <div class="form-group">#}
-{#                <label for="keywords"><h5>Keywords:</h5></label>#}
-{#                <input type="text" class="form-control" id="keywords" placeholder="Introduce your project in several words here" required>#}
-{#                <div class="valid-feedback">Valid.</div>#}
-{#    			<div class="invalid-feedback">Please fill out this field.</div>#}
-{#             </div>#}
-{##}
-{#             <div class="form-group">#}
-{#                <label for="description"><h5>Project description:</h5></label>#}
-{#                <textarea class="form-control" rows="5" id="description" placeholder="Provide tasks and project-related information here" required></textarea>#}
-{#                <div class="valid-feedback">Valid.</div>#}
-{#    			<div class="invalid-feedback">Please fill out this field.</div>#}
-{#             </div>#}
-{##}
-{#             <div class="form-group">#}
-{#                <label for="description"><h5>Required skills:</h5></label><span><button type="button" class="close float-right" data-toggle="modal" data-target="#addnew" style="outline:none"><small>Add a new skill</small></button></span>#}
-{##}
-{#                <div class="modal fade" id="addnew">#}
-{#                  	<div class="modal-dialog modal-lg">#}
-{#                    <div class="modal-content">#}
-{##}
-{#                      	<div class="modal-header">#}
-{#                        	<h4 class="modal-title">Add skill</h4>#}
-{#                        	<button type="button" class="close" data-dismiss="modal">&times;</button>#}
-{#                      	</div>#}
-{##}
-{#                      	<div class="modal-body">#}
-{#                        	<h5>Skill list:</h5>#}
-{#                        	<div id="addskill">#}
-{#                        	<template id="skills">#}
-{#                          		<button type="button" class="btn btn-primary" id="skill">{{skill}}</button>#}
-{#                          	</template>#}
-{#                          	</div>#}
-{#                      	</div>#}
-{##}
-{#                      	<div class="modal-footer">#}
-{#                      		<button type="button" class="btn btn-primary" data-dismiss="modal" id="confirmadd">Add</button>#}
-{#                        	<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>#}
-{#                      	</div>#}
-{##}
-{#                    </div>#}
-{#                  	</div>#}
-{#                </div>#}
-{##}
-{#                <div class="card-columns" id="rskill">#}
-{#                	<template id="required-skill">#}
-{#	                  	<div class="card">#}
-{#		                    <button type="button" class="close float-right">×</button>#}
-{#		                    <div class="card-body text-center">#}
-{#		                      	<p class="card-text">{{skill}}</p>#}
-{#		                    </div>#}
-{#	                  	</div>#}
-{#					</template>#}
-{#                </div>#}
-{#            </div>#}
-{##}
-{#            <div class="form-group">#}
-{#	          	<label for="payment"><h5>Payment:</h5></label>#}
-{#		          	<div class="input-group mb-3">#}
-{#		              	<div class="input-group-prepend">#}
-{#		                	<span class="input-group-text"><strong>Total work hours:</strong></span>#}
-{#		              	</div>#}
-{#		             	<input type="text" class="form-control" id="hours" placeholder="" required>#}
-{#                        <div class="valid-feedback">Valid.</div>#}
-{#		    			<div class="invalid-feedback">Please fill out this field.</div>#}
-{#		            </div>#}
-{##}
-{#		            <div class="input-group mb-3">#}
-{#		              	<div class="input-group-prepend">#}
-{#		                	<span class="input-group-text"><strong>Ponits per hour:</strong></span>#}
-{#		              	</div>#}
-{#		             	<input type="text" class="form-control" id="payrate" placeholder="" required>#}
-{#                        <div class="valid-feedback">Valid.</div>#}
-{#		    			<div class="invalid-feedback">Please fill out this field.</div>#}
-{#		            </div>#}
-{##}
-{#            </div>#}
-{##}
-{#            <div class="form-group">#}
-{#			    <label for="sel1"><h5>Due day:</h5></label>#}
-{#                <div class="input-group date" data-target-input="nearest">#}
-{#                    <input id="picker" type="text" class="form-control datetimepicker-input" data-target="#datetimepicker4"/>#}
-{#                   	<div class="valid-feedback">Valid.</div>#}
-{#		    		<div class="invalid-feedback">Please fill out this field.</div>#}
-{#                </div>#}
-{#            </div>#}
-{#            <br>#}
-{# 			<div>#}
-{#                <button type="submit" class="btn btn-primary">Submit</button>#}
-{# 				<button type="submit" class="btn btn-primary">Save</button>#}
-{# 				<button class="btn btn-primary">Cancel</button>#}
-{# 			</div>#}
-{#          </form>#}
-{#        </div>#}
-{#     	<div><br><br></div>#}
-{#     </div>#}
-{#          	<div><br><br><br></div>#}
-{#     </div>#}
-{#     </div>#}
-{##}
-{##}
+            </div>
+        </div>
+    </div>
+    </div>
 {#<script>#}
-{#     (function() {#}
-{#  'use strict';#}
-{#  window.addEventListener('load', function() {#}
-{#    // Get the forms we want to add validation styles to#}
-{#    var forms = document.getElementsByClassName('needs-validation');#}
-{#    // Loop over them and prevent submission#}
-{#    var validation = Array.prototype.filter.call(forms, function(form) {#}
-{#      form.addEventListener('submit', function(event) {#}
-{#        if (form.checkValidity() === false) {#}
-{#          event.preventDefault();#}
-{#          event.stopPropagation();#}
-{#        }#}
-{#        form.classList.add('was-validated');#}
-{#      }, false);#}
-{#    });#}
-{#  }, false);#}
-{#})();#}
+{#  $(function () {#}
+{#    $("#div_id_end_date").datepicker();#}
+{#  });#}
+{##}
 {#</script>#}
-{##}
-{#	<script type="text/javascript">#}
-{#       	$('#picker').datetimepicker({#}
-{#       		format: 'YYYY-MM-DD',#}
-{#       	});#}
-{#	</script>#}
-{##}
-{#	<script src="/js/mustache.js"></script>#}
-{#	<script src="/js/create.js"></script>#}
-{##}
-{#</body>#}
-
 {% endblock content %}
