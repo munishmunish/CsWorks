@@ -79,7 +79,7 @@ def admin_dash(request):
             return render(request, 'admindash.html', {'projects': projects, 'skills': skills, 'form': form})
     return render(request, 'admindash.html', {'projects': projects, 'skills': skills, 'form': form})
 
-# @login_required(login_url='login')
+@login_required(login_url='login')
 # @allowed_users(allowed_roles=['client'])
 # @admin_only
 def client_dash(request):
@@ -105,12 +105,12 @@ def create_project(request):
         form = CreateProjectForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
-            post.username = request.user.username
+            post.username = request.user
             post.save()
             messages.success(request, 'Project was created successfully')
             return redirect('createproject')
         else:
-            messages.error(request, "Something went wrong! Try again")
+            messages.error(request, "Fill the form with correct end date and total work hours")
             return redirect('createproject')
     context = {'form': form}
     return render(request, 'create_project.html', context)

@@ -67,15 +67,11 @@
                     <form action='' method="POST">
                         {% csrf_token %}
                         {% for non_field_error in form.non_field_errors %}
-                            <p style="color:red">{{ non_field_error }}</p>
+                            <div class="alert alert-danger">{{ non_field_errors }}</div>
                         {% endfor %}
                         {% for field in form %}
                             <div>
-    {#                                {{ field.label_tag }}#}
                                 <div style="margin-bottom: 1rem">{{ field| as_crispy_field }} </div>
-{#                                {%  for error in field.errors%}#}
-{#                                    <p style="color:red">{{ error }}</p>#}
-{#                                {%  endfor %}#}
                             </div>
                         {% endfor %}
 

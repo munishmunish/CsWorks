@@ -31,21 +31,19 @@ class CreatUserForm(UserCreationForm):
 
 class CreateProjectForm(forms.ModelForm):
     end_date = forms.DateField(
-        widget=forms.DateInput(),
-        # validators=[MaxValueValidator(limit_value=date.today()),
+        widget=forms.DateInput,
     )
-
     class Meta:
         model = Project
-        # fields = '__all__'
         fields = ['title', 'description', 'start_date', 'end_date', 'total_work_hours', 'point_per_hour']
 
-    def __init__(self, *args, **kwargs):
-        super(CreateProjectForm, self).__init__(*args, **kwargs)
+    def clean_end_date(self, *args, **kwargs):
+        start_date = self.cleaned_data.get('start_date')
+        end_date = self.cleaned_data.get('end_date')
 
-        self.fields['start_date'].required = True
-        # self.fields['end_date'].required = True
-
+        if end_date <= start_date:
+            raise forms.ValidationError({"End date cannot be in the past"})
+        return end_date
 
 class SkillForm(forms.ModelForm):
     class Meta:

@@ -63,10 +63,10 @@
                 <div class="col-md-6 login-form-1">
                     {% for message in messages %}
                         {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
-                            <h4 style="color:green">{{ message }}</h4>
+                            <div class="alert alert-success" style="text-align: center">{{ message }}</div>
                         {% endif %}
                         {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
-                            <h4 class="errors">{{ message }}</h4>
+                            <div class="alert alert-danger" style="text-align: center">{{ message }}</div>
                         {% endif %}
                     {% endfor %}
                     <h2>    Login  </h2>
