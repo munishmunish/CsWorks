@@ -61,35 +61,12 @@
                             <a class ="btn btn-info" href="{% url 'updateproject' i.id %}">Update</a>
                         </td>
                         <td>
-                            <a data-toggle="modal" data-target="#myModal" class ="btn btn-danger" href="">DELETE</a>
+                            <a class ="btn btn-danger" href="{% url 'deleteproject' i.id %}">DELETE</a>
                         </td>
                     </tr>
-
-                    <!-- Modal -->
-                    <div id="myModal" class="modal fade" role="dialog">
-                      <div class="modal-dialog">
-
-                        <!-- Modal content-->
-                        <div class="modal-content">
-                          <div class="modal-header">
-                              <h4 class="modal-title">Delete {{ i.title  }}</h4>
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-
-                          </div>
-                          <div class="modal-body">
-                            <p>Are you sure you want to delete {{ i.title }} ?</p>
-                          </div>
-                          <div id="{{i.id}}" class="modal-footer">
-                              <button type="button" class="btn btn-djanger" data-dismiss="modal">Confirm</button>
-                            <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
-                          </div>
-                        </div>
-
-                      </div>
-                    </div>
-
                 {% endfor %}
             </table>
+
 
         </div>
 

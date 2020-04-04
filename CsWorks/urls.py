@@ -33,6 +33,7 @@ urlpatterns = [
     path(r'login/clientdetail', views.client_detail, name='clientdetail'),
     path(r'login/createproject', views.create_project, name='createproject'),
     path(r'login/updateproject/<str:pk>/', views.update_project, name='updateproject'),
+    path(r'login/deleteproject/<str:pk>/', views.delete_project, name='deleteproject'),
 
 
 ]

@@ -82,8 +82,6 @@ def admin_dash(request):
     return render(request, 'admindash.html', {'pending_projects': pending_projects, 'approved_projects': approved_projects, 'completed_projects':completed_projects, 'skills': skills, 'form': form})
 
 @login_required(login_url='login')
-# @allowed_users(allowed_roles=['client'])
-# @admin_only
 def client_dash(request):
     projects = Project.objects.filter(username=request.user.username)
     return render(request, 'clientdash.html', {'projects': projects})
@@ -131,5 +129,10 @@ def update_project(request, pk):
     context = {'form': form}
     return render(request, 'create_project.html', context)
 
-# @login_required(login_url='login')
-# def delete_project(request, pk):
+@login_required(login_url='login')
+def delete_project(request, pk):
+    project = Project.objects.get(id=pk)
+    if request.method == 'POST':
+        project.delete()
+        return redirect('admindash')
+    return render(request, 'delete_project.html', {'project': project})
