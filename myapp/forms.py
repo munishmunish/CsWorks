@@ -35,7 +35,13 @@ class CreateProjectForm(forms.ModelForm):
     )
     class Meta:
         model = Project
-        fields = ['title', 'description', 'start_date', 'end_date', 'total_work_hours', 'point_per_hour']
+        fields = ['title', 'description', 'start_date', 'end_date', 'status', 'total_work_hours', 'point_per_hour']
+
+    # def __init__(self, *args, **kwargs):
+    #     super(CreateProjectForm, self).__init__(*args, **kwargs)
+    #     instance = getattr(self, 'instance', None)
+    #     if instance and instance.id:
+    #         self.fields['title'].widget.attrs['disabled'] = 'disabled'
 
     def clean_end_date(self, *args, **kwargs):
         start_date = self.cleaned_data.get('start_date')

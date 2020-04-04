@@ -67,7 +67,9 @@ def register(request):
 
 @login_required(login_url='login')
 def admin_dash(request):
-    projects = Project.objects.filter(status=1)
+    pending_projects = Project.objects.filter(status=1)
+    approved_projects = Project.objects.filter(status=2)
+    completed_projects = Project.objects.filter(status=4)
     skills = Skills.objects.all()
     form = SkillForm()
     if request.method == 'POST':
@@ -76,8 +78,8 @@ def admin_dash(request):
             form.save()
             skill = form.cleaned_data.get('skill')
             messages.success(request, "New Skill " + skill + " added to the database")
-            return render(request, 'admindash.html', {'projects': projects, 'skills': skills, 'form': form})
-    return render(request, 'admindash.html', {'projects': projects, 'skills': skills, 'form': form})
+            return render(request, 'admindash.html', {'pending_projects': pending_projects, 'approved_projects': approved_projects, 'completed_projects':completed_projects, 'skills': skills, 'form': form})
+    return render(request, 'admindash.html', {'pending_projects': pending_projects, 'approved_projects': approved_projects, 'completed_projects':completed_projects, 'skills': skills, 'form': form})
 
 @login_required(login_url='login')
 # @allowed_users(allowed_roles=['client'])
@@ -114,3 +116,20 @@ def create_project(request):
             return redirect('createproject')
     context = {'form': form}
     return render(request, 'create_project.html', context)
+
+@login_required(login_url='login')
+def update_project(request, pk):
+    project = Project.objects.get(id=pk)
+    form = CreateProjectForm(instance=project)
+    if request.method == 'POST':
+        form = CreateProjectForm(request.POST, instance=project)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.username = request.user
+            post.save()
+            return redirect('admindash')
+    context = {'form': form}
+    return render(request, 'create_project.html', context)
+
+# @login_required(login_url='login')
+# def delete_project(request, pk):
