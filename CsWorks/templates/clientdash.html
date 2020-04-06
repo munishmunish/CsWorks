@@ -12,7 +12,11 @@
       border: #667ac2;
       background-color: #667ac2;
     }
-
+    .button{
+            width: 13rem;
+            font-size: 0.9rem;
+            padding: 1rem;
+        }
     .page-link {
       color: white;
       background-color: #343a40;
@@ -29,15 +33,11 @@
   		<br>
     	<img class="card-img-top" src={% static 'images/img_avatar.png' %} alt="Card image" style="width:100%">
     		<div class="card-body" id="inform">
-      		<!-- <template id="information"> -->
       		<h4 class="card-title">Username: {{ request.user.username }}</h4>
-{#      		<p class="card-text">My Projects: 13</a></p>#}
-{#      		<p class="card-text">Finished Projects: <a href="#">0</a></p>#}
-          <a href={% url 'createproject' %} class="btn btn-primary">Create New Project</a>
+          <a href="{% url 'createproject' %}" class="btn btn-primary button">Create New Project</a>
           <br>
           <br>
-      		<a href={% url 'clientdetail' %} class="btn btn-primary">View Profile</a>
-      		<!-- </template> -->
+      		<a href="{% url 'clientdetail' %}" class="btn btn-primary button">View Profile</a>
     		</div>
   	</div>
   	<div class="card col-sm-8">
@@ -56,11 +56,9 @@
         </div>
         <hr style="filter: progid:dximagetransform.microsoft.glow(color="#987cb9,strength=10) width="100%" color="#987cb9" size=1>
 
-      <!-- <p><font size="4"><strong>Projects Being Taken</strong></font></p> -->
-
        <ul class="nav nav-tabs" role="tablist" style="border-color: white">
         <li class="nav-item">
-          <a class="nav-link active" style="border-color: white"><font size="4">Projects In Progress</font></a>
+          <a class="nav-link active" style="border-color: white"><font size="4">Posted Projects</font></a>
         </li>
       </ul>
 
@@ -85,89 +83,44 @@
                         <td>{{ i.status }}</td>
                         <td>{{ i.total_work_hours }}</td>
                         <td>{{ i.point_per_hour }}</td>
+                        <td>
+                            <a class ="btn btn-danger" href="{% url 'deleteproject' i.id %}">DELETE</a>
+                        </td>
                     </tr>
                 {% endfor %}
             </table>
         </div>
 
-      <ul class="nav nav-tabs" role="tablist" style="border-color: white">
+            <ul class="nav nav-tabs" role="tablist" style="border-color: white">
         <li class="nav-item">
-          <a class="nav-link active" data-toggle="tab" href="#posted-project" style="border-color: white"><font size="4">Posted Projects</font></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" data-toggle="tab" href="#pending-project" style="border-color: white"><font size="4">Pending Projects</font></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" data-toggle="tab" href="#draft" style="border-color: white"><font size="4">Drafts</font></a>
+          <a class="nav-link active" style="border-color: white"><font size="4">Projects In Progress</font></a>
         </li>
       </ul>
 
-      <div class="tab-content">
+        <div class="card card-body" style="margin-bottom: 2rem">
+            <table class="table table-hover table-responsive">
+                <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Status</th>
+                    <th>Total work hours</th>
+                    <th>Points per hour</th>
+                </tr>
 
-      <div id="posted-project" class="container tab-pane active">
-      <div class="list-group" id="posted-project-list">
-        <!-- <template id="reviewed-projects"> -->
-        <a href="posted_projects.html" class="list-group-item list-group-item-action" data-toggle="tooltip" data-placement="right" title="Click to view all applicants!"> <!-- row one -->
-        <div><span><strong>Searching Algorithm Comparision</strong></span><span style="float:right">Applicants:  3</span></div>
-        <div><span>Due: 12/30/2019</span></div></a> <!-- row one end -->
-        <!-- </template> -->
-        <a href="#" class="list-group-item list-group-item-action" data-toggle="tooltip" data-placement="right" title="Click to view all applicants!">
-        <div><span><strong>Web Application: Desktop Build Up</strong></span><span style="float:right">Applicants:  0</span></div>
-        <div><span>Due: 02/25/2020</span></div></a>
-        <a href="#" class="list-group-item list-group-item-action" data-toggle="tooltip" data-placement="right" title="Click to view all applicants!">
-        <div><span><strong>Assembly Translator (Bash)</strong></span><span style="float:right">Applicants:  2</span></div>
-        <div><span>Due: 01/20/2020</span></div></a>
-        <a href="#" class="list-group-item list-group-item-action" data-toggle="tooltip" data-placement="right" title="Click to view all applicants!">
-        <div><span><strong>IOS: Unit Converter with Animation</strong></span><span style="float:right">Applicants:  5</span></div>
-        <div><span>Due: 02/20/2020</span></div></a>
-<!--         <a href="#" class="list-group-item list-group-item-action">
-        <div><span><strong>{{title}}</strong></span><span style="float:right">Applicants:  {{num}}</span></div>
-        <div><span>Due: {{end_date}}</span></div></a>
- -->      </div>
-      <br>
-	    <a href="#" class="btn btn-info" role="button">Previous</a>
-      <a href="#" class="btn btn-info float-right" role="button">Next</a>
-    </div>
-
-      <div id="pending-project" class="container tab-pane fade">
-      <div class="list-group" id="pending-project-list">
-        <!-- <template id="reviewed-projects"> -->
-        <a href="#" class="list-group-item list-group-item-action"> <!-- row one -->
-        <div><span><strong>Grade Book Simulator</strong></span><span style="float:right">Status: Submitted</span></div>
-        <div><span>Date Submitted: 12/14/2019</span></div></a> <!-- row one end -->
-        <!-- </template> -->
-        <a href="#" class="list-group-item list-group-item-action">
-        <div><span><strong>Elevator Simulator</strong></span><span style="float:right">Status: Submitted</span></div>
-        <div><span>Date Submitted: 12/15/2019</span></div></a>
-<!--         <a href="#" class="list-group-item list-group-item-action">
-        <div><span><strong>{{title}}</strong></span><span style="float:right">Status:{{status}}</span></div>
-        <div><span>Date Submitted: {{start_date}}</span></div></a>
-        <a href="#" class="list-group-item list-group-item-action">
-        <div><span><strong>{{title}}</strong></span><span style="float:right">Status:{{status}}</span></div>
-        <div><span>Date Submitted: {{start_date}}</span></div></a> -->
-      </div>
-        <br>
-        <a href="#" class="btn btn-info" role="button">Previous</a>
-        <a href="#" class="btn btn-info float-right" role="button">Next</a>
-    </div>
-
-        <div id="draft" class="container tab-pane fade">
-        <div class="list-group" id="draft-list">
-        <!-- <template id="reviewed-projects"> -->
-        <a href="#" class="list-group-item list-group-item-action" data-toggle="tooltip" data-placement="left" title="Click to edit!">
-        <div><span><strong>Double Linked Lists</strong></span><span style="float:right">Status: Draft</span></div>
-        <div><span>Due: 12/25/2019</span></div></a>
-        <!-- </template> -->
-<!--         <a href="#" class="list-group-item list-group-item-action">
-        <div><span><strong>{{title}}</strong></span><span style="float:right">Status:{{status}}</span></div>
-        <div><span>Date Submitted: {{start_date}}</span></div></a>
-        <a href="#" class="list-group-item list-group-item-action">
-        <div><span><strong>{{title}}</strong></span><span style="float:right">Status:{{status}}</span></div>
-        <div><span>Date Submitted: {{start_date}}</span></div></a> -->
-        </div>
-          <br>
-          <a href="#" class="btn btn-info" role="button">Previous</a>
-          <a href="#" class="btn btn-info float-right" role="button">Next</a>
+                {% for i in approved_projects %}
+                    <tr>
+                        <td>{{ i.title }}</td>
+                        <td>{{ i.description }}</td>
+                        <td>{{ i.start_date }}</td>
+                        <td>{{ i.end_date }}</td>
+                        <td>{{ i.status }}</td>
+                        <td>{{ i.total_work_hours }}</td>
+                        <td>{{ i.point_per_hour }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
         </div>
     <br>
   </div>

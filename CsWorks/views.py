@@ -3,11 +3,12 @@ from django.contrib.auth import authenticate, logout
 from django.contrib.auth import login
 
 from myapp.decorators import unauthenticated_user, allowed_users, admin_only
-from myapp.forms import CreatUserForm, CreateProjectForm, SkillForm
+from myapp.forms import CreatUserForm, CreateProjectForm, SkillForm, WorkerForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
 from myapp.models import Project, Skills
+from django.core.paginator import Paginator
 
 def home(request):
     return render(request, 'home.html')
@@ -83,12 +84,16 @@ def admin_dash(request):
 
 @login_required(login_url='login')
 def client_dash(request):
-    projects = Project.objects.filter(username=request.user.username)
-    return render(request, 'clientdash.html', {'projects': projects})
+    projects = Project.objects.filter(username=request.user.username).filter(status=1)
+    approved_projects = Project.objects.filter(username=request.user.username).filter(status=2)
+    context = {'projects': projects, 'approved_projects': approved_projects}
+    return render(request, 'clientdash.html', context)
 
 @login_required(login_url='login')
 def worker_dash(request):
-    return render(request, 'workerdash.html')
+    projects = Project.objects.filter(status=2)
+    context = {'projects': projects}
+    return render(request, 'workerdash.html', context)
 
 @login_required(login_url='login')
 def worker_detail(request):
@@ -122,9 +127,7 @@ def update_project(request, pk):
     if request.method == 'POST':
         form = CreateProjectForm(request.POST, instance=project)
         if form.is_valid():
-            post = form.save(commit=False)
-            post.username = request.user
-            post.save()
+            form.save()
             return redirect('admindash')
     context = {'form': form}
     return render(request, 'create_project.html', context)
@@ -134,5 +137,32 @@ def delete_project(request, pk):
     project = Project.objects.get(id=pk)
     if request.method == 'POST':
         project.delete()
-        return redirect('admindash')
+        current_user = request.user
+        admin_user = Group.objects.get(name="admin").user_set.all()
+        if current_user in admin_user:
+            return redirect('admindash')
+        client_user = Group.objects.get(name="client").user_set.all()
+        if current_user in client_user:
+            return redirect('clientdash')
+        # worker_user = Group.objects.get(name="worker").user_set.all()
+        # if current_user in worker_user:
+        #     return redirect('workerdash')
     return render(request, 'delete_project.html', {'project': project})
+
+@login_required(login_url='login')
+def worker_approval(request):
+    user = request.user
+    form = WorkerForm()
+    if request.method == 'POST':
+        form = WorkerForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.username = request.user
+            post.save()
+            messages.success(request, 'Request has been sent! Please wait for a response.')
+            return redirect('workerapproval')
+        else:
+            messages.error(request, "Request didn't go through. Please check the details")
+            return redirect('workerapproval')
+    context = {'form': form, 'user': user}
+    return render(request, 'worker_approval.html', context)

@@ -1,11 +1,21 @@
 {% extends 'base.html' %}
-{% load crispy_forms_tags %}
 {% load staticfiles %}
+{% load crispy_forms_tags %}
 {% block content %}
+
     <style>
         .heading{
             margin-bottom: 1rem;
             color: darkblue;
+        }
+
+        .userdiaplay{
+            margin-bottom: 0.5rem;
+            background-color: #93C54B;
+            text-align: center;
+            height: 2rem;
+            font-size: 1.3rem;
+            font-weight: bold ;
         }
     </style>
 
@@ -14,11 +24,11 @@
     	<div class="card" style="background-color:lavender;">
       		<div class="col-sm-10 offset-sm-1">
               <br><br>
-            <a href={% url 'clientdash' %}>
+            <a href={% url 'workerdash' %}>
             <button class="btn btn-sm btn-primary float-right" style="font-size:20px">Back <i class="material-icons" style="font-size:18px"></i></button>
           </a>
                 <div class="heading">
-                    <h3>Create New Project </h3>
+                    <h3>Worker Approval Application </h3>
                 </div>
 
                 {% for message in messages %}
@@ -29,44 +39,19 @@
                             <div class="alert alert-danger">{{ message }}</div>
                         {% endif %}
                 {% endfor %}
-              <form action="" method="POST" autocomplete="off">
+              <form action="" method="POST">
                   {% csrf_token %}
-
-                  {{ form.title | as_crispy_field }}
-                  {{ form.title.errors }}
-
-                  {{ form.description | as_crispy_field }}
-                  {{ form.description.errors }}
-
-                  {{ form.start_date | as_crispy_field }}
-                  {{ form.start_date.errors }}
-
-                  {{ form.end_date | as_crispy_field }}
-                  {{ form.end_date.errors }}
-
-                  {{ form.status | as_crispy_field }}
-                  {{ form.status.errors }}
-
-                  {{ form.total_work_hours | as_crispy_field }}
-                  {{ form.total_work_hours.errors }}
-
-                  {{ form.point_per_hour | as_crispy_field }}
-                  {{ form.point_per_hour.errors }}
-
+                  <div class="userdiaplay">
+                      Username : {{ user }}
+                  </div>
+                  {{ form.phone_number| as_crispy_field }}
+                  {{ form.application_date| as_crispy_field }}
                   <div style = "margin-bottom: 2rem">
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button style="font-size:15px" type="submit" class="btn btn-lg btn-primary">APPLY</button>
                     </div>
               </form>
             </div>
         </div>
     </div>
     </div>
-<script>
-  $(function () {
-    $("#id_end_date").datepicker({
-         format:'yyyy-mm-dd',
-    });
-  });
-
-</script>
 {% endblock content %}

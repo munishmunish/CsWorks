@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import User
-from myapp.models import Project, Skills
+from myapp.models import Project, Skills, Worker
 from datetime import date
 from django.core.validators import MaxValueValidator
 from django.contrib.auth.forms import UserCreationForm
@@ -11,17 +11,18 @@ from django.forms import ModelForm
 class CreatUserForm(UserCreationForm):
     class Meta:
         model = User
-        fields = ['username','email', 'first_name','last_name','password1', 'password2']
+        fields = ['username', 'email', 'first_name', 'last_name', 'password1', 'password2']
         widgets = {
-            'username': forms.TextInput(attrs={'placeholder': 'Username *','class': 'form-control'}),
-            'email': forms.EmailInput(attrs={'placeholder': 'Email *','class': 'form-control'}),
-            'first_name': forms.TextInput(attrs={'placeholder': 'First Name *','class': 'form-control'}),
-            'last_name': forms.TextInput(attrs={'placeholder': 'Last Name *','class': 'form-control'}),
+            'username': forms.TextInput(attrs={'placeholder': 'Username *', 'class': 'form-control'}),
+            'email': forms.EmailInput(attrs={'placeholder': 'Email *', 'class': 'form-control'}),
+            'first_name': forms.TextInput(attrs={'placeholder': 'First Name *', 'class': 'form-control'}),
+            'last_name': forms.TextInput(attrs={'placeholder': 'Last Name *', 'class': 'form-control'}),
         }
     def __init__(self, *args, **kwargs):
         super(CreatUserForm, self).__init__(*args, **kwargs)
 
         self.fields['email'].required = True
+        self.fields['email'].unique = True
         self.fields['first_name'].required = True
         self.fields['last_name'].required = True
         self.fields['password1'].widget = forms.PasswordInput(attrs={'placeholder': 'Password *'})
@@ -37,12 +38,6 @@ class CreateProjectForm(forms.ModelForm):
         model = Project
         fields = ['title', 'description', 'start_date', 'end_date', 'status', 'total_work_hours', 'point_per_hour']
 
-    # def __init__(self, *args, **kwargs):
-    #     super(CreateProjectForm, self).__init__(*args, **kwargs)
-    #     instance = getattr(self, 'instance', None)
-    #     if instance and instance.id:
-    #         self.fields['title'].widget.attrs['disabled'] = 'disabled'
-
     def clean_end_date(self, *args, **kwargs):
         start_date = self.cleaned_data.get('start_date')
         end_date = self.cleaned_data.get('end_date')
@@ -55,3 +50,9 @@ class SkillForm(forms.ModelForm):
     class Meta:
         model = Skills
         fields = '__all__'
+
+
+class WorkerForm(forms.ModelForm):
+    class Meta:
+        model = Worker
+        fields = ['application_date', 'phone_number']

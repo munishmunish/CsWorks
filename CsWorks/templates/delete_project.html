@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 {% load crispy_forms_tags %}
+{% load user_tags %}
 {% block content %}
     <script>
         $(document).ready(function(){
@@ -14,7 +15,11 @@
                         <div class="modal-content">
                           <div class="modal-header">
                               <h4 class="modal-title">Delete {{ project.title  }}</h4>
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            {% if request.user|has_group:"admin" %}
+                                <a href="{% url 'admindash' %}"><button type="button" class="close">&times;</button></a>
+                            {% else %}
+                                 <a href="{% url 'clientdash' %}"><button type="button" class="close">&times;</button></a>
+                            {% endif %}
 
                           </div>
                           <div class="modal-body">
@@ -25,9 +30,15 @@
                                   {% csrf_token %}
                                 <input class="btn btn-danger" type="submit" name="CONFIRM">
                               </form>
-                                  <a class = "btn btn-info"href="{% url 'admindash' %}">
+                                {% if request.user|has_group:"admin" %}
+                                  <a class = "btn btn-info" href="{% url 'admindash' %}">
                                       Cancel
                                   </a>
+                                {% else %}
+                                    <a class = "btn btn-info" href="{% url 'clientdash' %}">
+                                      Cancel
+                                  </a>
+                                {% endif %}
                           </div>
                         </div>
 
