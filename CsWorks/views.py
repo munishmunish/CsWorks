@@ -1,13 +1,13 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, logout
 from django.contrib.auth import login
-
+from datetime import date
 from myapp.decorators import unauthenticated_user, allowed_users, admin_only
 from myapp.forms import CreatUserForm, CreateProjectForm, SkillForm, WorkerForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
-from myapp.models import Project, Skills
+from myapp.models import Project, Skills, Worker, Worker_Status
 from django.core.paginator import Paginator
 
 def home(request):
@@ -166,3 +166,35 @@ def worker_approval(request):
             return redirect('workerapproval')
     context = {'form': form, 'user': user}
     return render(request, 'worker_approval.html', context)
+
+@login_required(login_url='login')
+def worker_application(request):
+    worker = Worker.objects.filter(status=1)
+    context = {'worker': worker}
+    return render(request, 'worker_Applications.html', context)
+
+@login_required(login_url='login')
+def worker_update(request, pk):
+    worker = Worker.objects.filter(status=1)
+    approved_worker = Worker.objects.get(id=pk)
+    status_change = Worker_Status.objects.get(status="APPROVED")
+    approved_worker.status = status_change
+    approved_worker.save(update_fields=['status'])
+    context = {'worker': worker}
+    return render(request, 'worker_Applications.html', context)
+
+@login_required(login_url='login')
+def worker_decline(request, pk):
+    worker = Worker.objects.filter(status=1)
+    declined_worker = Worker.objects.get(id=pk)
+    status_change = Worker_Status.objects.get(status="DECLINED")
+    declined_worker.status = status_change
+    declined_worker.save(update_fields=['status'])
+    context = {'worker': worker}
+    return render(request, 'worker_Applications.html', context)
+
+@login_required(login_url='login')
+def approved_workers(request):
+    worker = Worker.objects.filter(status=2)
+    context = {'worker': worker}
+    return render(request, 'approved_workers.html', context)

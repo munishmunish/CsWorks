@@ -35,5 +35,10 @@ urlpatterns = [
     path(r'login/updateproject/<str:pk>/', views.update_project, name='updateproject'),
     path(r'login/deleteproject/<str:pk>/', views.delete_project, name='deleteproject'),
     path(r'login/workerapproval', views.worker_approval, name='workerapproval'),
+    path(r'login/workerapplication', views.worker_application, name='workerapplication'),
+    path(r'login/workerapproved', views.approved_workers, name='workerapproved'),
+    path(r'login/workerupdate/<str:pk>/', views.worker_update, name='workerupdate'),
+    path(r'login/workerdecline/<str:pk>/', views.worker_decline, name='workerdecline'),
+
 
 ]

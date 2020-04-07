@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="col-sm-12" style="margin-top: 2rem">
+     <ul class="nav nav-tabs" role="tablist" style="border-color: white">
+        <li class="nav-item">
+          <a class="nav-link active" style="border-color: white"><font size="4">New Worker Applications</font></a>
+        </li>
+      </ul>
+
+        <div class="card card-body" style="margin-bottom: 2rem">
+            <table class="table table-hover">
+                <tr>
+                    <th>Username</th>
+                    <th>Phone Number</th>
+                    <th>Application Date</th>
+                    <th>Status</th>
+                    <th>Update</th>
+                    <th>Delete</th>
+                </tr>
+
+                {% for i in worker %}
+                    <tr>
+                        <td>{{ i.username }}</td>
+                        <td>{{ i.phone_number }}</td>
+                        <td>{{ i.application_date }}</td>
+                        <td>{{ i.status }}</td>
+                        <td>
+                            <a class ="btn btn-info" href="{% url 'workerupdate' i.id %}">APPROVE</a>
+                        </td>
+                        <td>
+                            <a class ="btn btn-danger" href="{% url 'workerdecline' i.id %}">DECLINE</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+{% endblock content %}
