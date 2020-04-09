@@ -4,6 +4,7 @@
     #collapse_target{
         margin-right: 50px;
     }
+
 </style>
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top">
 
@@ -60,7 +61,13 @@
           <a class="dropdown-item" href="#">Agreement</a>
         </div>
       </li>
-        <li class="nav-item dropdown">
+
+        {% if request.user.is_authenticated %}
+            <li class="nav-item">
+                <a class="nav-link" href={% url 'logout' %}>LOGOUT</a>
+            </li>
+            {% else %}
+            <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
               Login Or Register
             </a>
@@ -72,6 +79,7 @@
                 {% endif %}
             </div>
       </li>
+        {% endif %}
     </ul>
   </div>
 </nav>
